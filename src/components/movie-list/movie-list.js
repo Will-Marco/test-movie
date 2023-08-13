@@ -5,7 +5,7 @@ const MovieList = ({ data }) => {
   return (
     <ul className="movie-list list-group">
       {data.map((item) => (
-        <MovieListItem {...item}/>
+        <MovieListItem key={item.id} {...item} />
       ))}
     </ul>
   );

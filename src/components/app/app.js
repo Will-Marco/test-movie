@@ -8,24 +8,28 @@ import "./app.css";
 function App() {
   const data = [
     {
+      id: 1,
       name: "Interstellar",
       viewers: "1964004",
-	  favourite : true
+      favourite: true,
     },
     {
+      id: 2,
       name: "Incaption",
       viewers: "2450544",
-	  favourite : false
+      favourite: false,
     },
     {
+      id: 3,
       name: "Tenet",
       viewers: "551000",
-	  favourite : false
+      favourite: false,
     },
     {
+      id: 4,
       name: "Oppenheimer",
       viewers: "358000",
-	  favourite : true
+      favourite: true,
     },
   ];
   return (
