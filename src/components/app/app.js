@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import AppFilter from "../app-filter/app-filter";
 import AppInfo from "../app-info/app-info";
 import MovieList from "../movie-list/movie-list";
@@ -12,25 +13,25 @@ class App extends Component {
     this.state = {
       data: [
         {
-          id: 1,
+          id: uuidv4(),
           name: "Interstellar",
           viewers: "1964004",
           favourite: true,
         },
         {
-          id: 2,
+          id: uuidv4(),
           name: "Incaption",
           viewers: "2450544",
           favourite: false,
         },
         {
-          id: 3,
+          id: uuidv4(),
           name: "Tenet",
           viewers: "551000",
           favourite: false,
         },
         {
-          id: 4,
+          id: uuidv4(),
           name: "Oppenheimer",
           viewers: "358000",
           favourite: true,
@@ -47,6 +48,13 @@ class App extends Component {
     }));
   };
 
+  addForm = (item) => {
+    this.setState(({ data }) => ({
+      data: [...data, { ...item }],
+    }));
+    console.log(this.state.data);
+  };
+
   render() {
     return (
       <div className="app font-monospace">
@@ -57,7 +65,7 @@ class App extends Component {
             <AppFilter />
           </div>
           <MovieList data={this.state.data} onDelete={this.onDelete} />
-          <MoviesAddForm />
+          <MoviesAddForm addForm={this.addForm} />
         </div>
       </div>
     );
