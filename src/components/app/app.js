@@ -40,7 +40,11 @@ class App extends Component {
   }
 
   onDelete = (id) => {
-    console.log(id);
+    this.setState(({ data }) => ({
+      // const idx = data.findIndex((c) => c.id === id);
+      // data.slice(idx, 1); //mutabel
+      data: data.filter((c) => c.id !== id), //immutable
+    }));
   };
 
   render() {
