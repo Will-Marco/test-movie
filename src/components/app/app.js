@@ -16,25 +16,29 @@ class App extends Component {
           id: uuidv4(),
           name: "Interstellar",
           viewers: "1964004",
-          favourite: true,
+          favourite: false,
+          like: false,
         },
         {
           id: uuidv4(),
           name: "Incaption",
           viewers: "2450544",
           favourite: false,
+          like: false,
         },
         {
           id: uuidv4(),
           name: "Tenet",
           viewers: "551000",
           favourite: false,
+          like: false,
         },
         {
           id: uuidv4(),
           name: "Oppenheimer",
           viewers: "358000",
-          favourite: true,
+          favourite: false,
+          like: false,
         },
       ],
     };
@@ -49,13 +53,30 @@ class App extends Component {
   };
 
   addForm = (item) => {
+    const newItem = {
+      id: uuidv4(),
+      name: item.name,
+      viewers: item.viewers,
+      favourite: false,
+      like: false,
+    };
     this.setState(({ data }) => ({
-      data: [...data, { ...item }],
+      data: [...data, newItem],
     }));
-    console.log(this.state.data);
+  };
+
+  onToggleProp = (id, prop) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) return { ...item, [prop]: !item[prop] };
+        return item;
+      }),
+    }));
   };
 
   render() {
+    const { data } = this.state;
+    
     return (
       <div className="app font-monospace">
         <div className="content">
@@ -64,7 +85,11 @@ class App extends Component {
             <SearchPanel />
             <AppFilter />
           </div>
-          <MovieList data={this.state.data} onDelete={this.onDelete} />
+          <MovieList
+            onToggleProp={this.onToggleProp}
+            data={data}
+            onDelete={this.onDelete}
+          />
           <MoviesAddForm addForm={this.addForm} />
         </div>
       </div>
